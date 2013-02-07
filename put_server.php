@@ -2,7 +2,7 @@
 
 // set some variables
 $host = $argv[1];
-$port = 9997;
+$port = intval($argv[2]);
 // don't timeout!
 set_time_limit(0);
 // create socket

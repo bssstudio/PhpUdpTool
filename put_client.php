@@ -5,11 +5,38 @@ $pps = 1000000 / $packet_segmentation;
 
 // set some variables
 $host = $argv[1];
-$port = 9997;
+$port = $argv[2];
 
 //packet settings
 $packet_size = 250;
 
+$settings = array();
+//read settings
+for ($i=2; $i<count($argv); $i++) {
+	if (strrpos($argv[$i], "=") !== false) {
+		// split the input into key value pair
+		$tmppair = explode("=", $argv[$i]);
+		$settings[$tmppair[0]] = $tmppair[1];	
+	}	
+}
+
+//check the settings
+foreach ($settings as $key => $value) {
+	switch ($key) {
+		case 'packet_segmentation':
+			$packet_segmentation = intval($value);
+			break;
+			
+		case 'packet_size':
+			$tmp_packet_size = intval($value);
+			
+			if ($tmp_packet_size > 50 && $tmp_packet_size < 20000) {
+				$packet_size = $tmp_packet_size;
+			}
+			
+			break;
+	}
+}
 
 
 function printStats()
