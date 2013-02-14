@@ -17,7 +17,7 @@ object JitterTest {
       
       val t1 = System.nanoTime()   
       
-      val (milli, nano) = nanoToMilliNano(20000000 - sleepAdj)
+      val (milli, nano) = nanoToMilliNano(28000000 - sleepAdj)
       Thread.sleep(milli, nano)
       
       val t2 = System.nanoTime()
@@ -25,7 +25,7 @@ object JitterTest {
       
       val diff21 = t2 - t1
       
-      val sleepAdjNew = sleepAdj + (diff21-20000000);
+      val sleepAdjNew = (0.99*sleepAdj + 0.01*(sleepAdj + (diff21-20000000))).toLong;
       
       
       println(diff21 + "      "+ sleepAdj+"     "+sleepAdjNew);
