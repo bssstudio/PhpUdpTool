@@ -78,6 +78,9 @@ $sent_ipdv_pos_rolling = 0;
 $sent_ipdv_neg_rolling = 0;
 $rolling_rate = 0.05;
 
+//callibration
+$sleepAdj = 0;
+
 $i=0;
 while (true)
 {
@@ -123,10 +126,12 @@ while (true)
 	}
 	
 	
+	$sleepAdj = 0.99*$sleepAdj + 0.01*($sleepAdj + ($cur_ipdv*1000));
+	echo ($cur_ipdv*1000)."        ".$sleepAdj."\n";
 	
 	$last_send_microtime = $send_microtime;
 
 	$i++;
-	usleep($packet_segmentation);
+	usleep($packet_segmentation-$sleepAdj);
 	
 }
