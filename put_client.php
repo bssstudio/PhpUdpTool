@@ -127,7 +127,7 @@ while (true)
 	
 	
 	$sleepAdj = 0.99*$sleepAdj + 0.01*($sleepAdj + ($cur_ipdv*1000));
-	echo ($cur_ipdv*1000)."        ".$sleepAdj."\n";
+	//echo ($cur_ipdv*1000)."        ".$sleepAdj."\n";
 	
 	$last_send_microtime = $send_microtime;
 
